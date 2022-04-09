@@ -25,7 +25,7 @@ public class ScheduleManager {  //ScheduleManager 클래스
 	
 	public void searchScheduleList(String content) {  //리스트에 있는 schedule 객체의 주소 중 원하는 주소를 찾는 함수
 		for(int i = 0; i < scheduleList.size(); i++) {  //for문으로 리스트 전체를 한 번씩 검사
-			if(scheduleList.get(i).getContent().equals(content)) {  //만약 리스트 인덱스의 주소값의 name이 사용자가 입력한 name이랑 같으면 
+			if(scheduleList.get(i).getContent().equals(content)) {  //만약 리스트 인덱스의 주소값의 content가 사용자가 입력한 content와 같으면 
 				this.schedule = scheduleList.get(i);     //여기 필드의 schedule의 값에 그 인덱스의 주소값을 할당
 				break;
 			}else {  //일치하는 게 없으면 null을 할당
@@ -37,29 +37,29 @@ public class ScheduleManager {  //ScheduleManager 클래스
 	public void addSchedule() {  //일정 추가 함수
 		int Category = 0;
 		while(Category ==0) {
-			System.out.println("1. for Course");
+			System.out.println("1. for Course");  //카테고리를 물음
 			System.out.println("2. for Assignment");
 			System.out.println("3. for Exam");
 			System.out.println("4. for Promise");
 			System.out.print("Select num for Schedule Category (1~4): ");
-			Category = input.nextInt();
+			Category = input.nextInt();  //카테고리를 입력받고 조건문에 따라 if 실행
 			if(Category == 1) {
 				this.schedule = new Schedule();
 				schedule.getUserInput(input);
 				addScheduleList(schedule); //addScheduleList() 함수로 리스트 현재 schedule 객체의 주소 추가
 				break;
 			}else if(Category == 2) {
-				this.schedule = new Assignment();
+				this.schedule = new Assignment();  //Assignment 객체 생성
 				schedule.getUserInput(input);
 				addScheduleList(schedule); //addScheduleList() 함수로 리스트 현재 schedule 객체의 주소 추가
 				break;
 			}else if(Category == 3) {
-				this.schedule = new Exam();
-				schedule.getUserInput(input);
+				this.schedule = new Exam();  //Exam 객체 생성
+				schedule.getUserInput(input); 
 				addScheduleList(schedule); //addScheduleList() 함수로 리스트 현재 schedule 객체의 주소 추가
 				break;
 			}else if(Category == 4) {
-				this.schedule = new Promise();
+				this.schedule = new Promise();  //Promise 객체 생성
 				schedule.getUserInput(input);
 				addScheduleList(schedule); //addScheduleList() 함수로 리스트 현재 schedule 객체의 주소 추가
 				break;
@@ -70,33 +70,33 @@ public class ScheduleManager {  //ScheduleManager 클래스
 		}        
 	}
 	public void deleteSchedule() {  //일정 삭제 함수
-		System.out.print("Input the Schedule content you want to delete: ");  //삭제할 일정의 이름을 입력받음.
-		input.nextLine();  //아래의 nextLine이 생략되는 현상 방지용
+		System.out.print("Input the Schedule content you want to delete: ");  //삭제할 일정의 content를 입력받음.
+		input.nextLine();
 		String content = input.nextLine();
-		searchScheduleList(content);  //searchScheduleList() 함수에서 현재 사용자가 입력한 name을 받아서 원하는 주소 찾아옴.
+		searchScheduleList(content);  //searchScheduleList() 함수에서 현재 사용자가 입력한 content를 받아서 원하는 주소 찾아옴.
 		if(schedule == null) { //schedule이 null이면 리턴하여 다시 하도록 함.
 			System.out.println("The schedule doesn't exist.");
 			return;
 		}
 		if(schedule.getContent().equals(content)) {  //schedule 객체의 content값이 입력받은 content 값과 같으면 실행
 			deleteScheduleList(schedule);  //deleteScheduleList()로 리스트에 저장되어 있는 해당 주소 삭제
-			schedule = null;              //현재 schedule도 null로 만듦
+			schedule = null;               //현재 schedule도 null로 만듦
 			System.out.println("The schedule" + content + "is deleted."); 
 		}
 	}
     public void editSchedule() {  //일정 편집 함수
-		System.out.print("Input the Schedule content you want to edit: ");
+		System.out.print("Input the Schedule content you want to edit: ");  //편집할 스케줄의 content를 입력받음.
 		input.nextLine();
 		String content = input.nextLine();
-		searchScheduleList(content);  //searchScheduleList() 함수에서 현재 사용자가 입력한 name을 받아서 원하는 주소 찾아옴.
+		searchScheduleList(content);  //searchScheduleList() 함수에서 현재 사용자가 입력한 content를 받아서 원하는 주소 찾아옴.
 		if(schedule == null) {  //schedule이 null이면 리턴하여 다시 하도록 함.
 			System.out.println("The schedule doesn't exist.");
 			return;
 		}
-		if(schedule.getContent().equals(content)) {  //schedule 객체의 name값이 입력받은 name 값과 같으면 실행(반복)
+		if(schedule.getContent().equals(content)) {  //schedule(필드)의 content 값이 입력받은 content 값과 같으면 실행(반복)
 			int num = 0;
-			while(num != 4) {
-				System.out.println();
+			while(num != 4) {  //사용자가 편집을 종료하기 전까지는 계속 반복한다.
+				System.out.println();  //아래는 어떤 것을 편집할 것인지 입력받는 코드이다
 				System.out.println("The schedule to be edited is " + content);
 				System.out.println("[Schedule Edit Menu]");
 				System.out.println("1. Edit date");
@@ -105,7 +105,7 @@ public class ScheduleManager {  //ScheduleManager 클래스
 				System.out.println("4. End editing");
 				System.out.print("Input one of the numbers: ");
 				num = input.nextInt();
-				if(num == 1) {
+				if(num == 1) {  //입력받은 num에 따라서 if문 실행
 					System.out.print("Input the new date: ");
 					int newdate = input.nextInt();
 					schedule.setDate(newdate);
