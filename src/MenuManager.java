@@ -9,9 +9,9 @@ public class MenuManager {
 		for(;;) {                   
 			System.out.println();  //줄바꿈용
 			System.out.println("[My Schedules Management System Menu]");  //메뉴 출력
-			System.out.println("1. Add Schedules");     
-			System.out.println("2. Delete Schedules");  
-			System.out.println("3. Edit Schedules");    
+			System.out.println("1. Add Schedule");     
+			System.out.println("2. Delete Schedule");  
+			System.out.println("3. Edit Schedule");    
 			System.out.println("4. View Schedules");          
 			System.out.println("5. Exit");             
 			System.out.print("Input one of the numbers: "); 
@@ -19,13 +19,13 @@ public class MenuManager {
 			
 			switch(num) {                
 			case 1:
-				scheduleManager.addSchedules();  //scheduleManager 클래스에 있는 addSchedules()를 불러 일정 추가
+				scheduleManager.addSchedule();  //scheduleManager 클래스에 있는 addSchedules()를 불러 일정 추가
 				break;                   
 			case 2:                     
-				scheduleManager.deleteSchedules();  //scheduleManager 클래스에 있는 deleteSchedules()를 불러 일정 삭제
+				scheduleManager.deleteSchedule();  //scheduleManager 클래스에 있는 deleteSchedules()를 불러 일정 삭제
 				break;                   
 			case 3:                     
-				scheduleManager.editSchedules();  //scheduleManager 클래스에 있는 editSchedules()를 불러 일정 편집    
+				scheduleManager.editSchedule();  //scheduleManager 클래스에 있는 editSchedules()를 불러 일정 편집    
 				break;                   
 			case 4:                      
 				scheduleManager.viewSchedules();  //scheduleManager 클래스에 있는 viewSchedules()를 불러 일정 보기
