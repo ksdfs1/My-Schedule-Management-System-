@@ -16,7 +16,11 @@ public class ScheduleManager {  //ScheduleManager 클래스
 	private Schedule schedule;
 	private ArrayList<Schedule> scheduleList = new ArrayList<Schedule>();  //schedule 객체의 주소를 저장하는 리스트
 	
-	ScheduleManager(Scanner input){  //생성자를 통해 Manumanager에서 받은 input을 그대로 사용
+	ScheduleManager() {  //기본 생성자
+		
+	}
+	
+	ScheduleManager(Scanner input) {  //생성자를 통해 ManuManager에서 받은 input을 그대로 사용
 		this.input = input;
 	}
 	
