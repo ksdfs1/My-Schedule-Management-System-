@@ -1,3 +1,4 @@
+//프로그램이 실행되면 메뉴를 출력하고 사용자로부터 메뉴 선택을 받는 MenuManager 클래스
 import java.util.Scanner;    
 
 public class MenuManager {  
@@ -15,7 +16,8 @@ public class MenuManager {
 			System.out.println("4. View Schedules");          
 			System.out.println("5. Exit");             
 			System.out.print("Input one of the numbers: "); 
-			int num = input.nextInt();   
+			int num = input.nextInt(); 
+			System.out.println();
 			
 			switch(num) {                
 			case 1:

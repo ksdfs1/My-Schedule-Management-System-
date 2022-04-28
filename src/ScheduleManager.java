@@ -1,3 +1,7 @@
+//Schedule 리스트를 관리하고 프로그램이 실행된 후 사용자로부터 메뉴를 입력받으면 그에 따라 이 클래스에 있는 메소드가 실행된다.
+//필드에는 사용자의 입력을 받는 input, 일정(객체)의 주소를 할당할 schedule, 모든 일정(객체)의 주소를 저장할 scheduleList(ArrayList) 변수가 있다.
+//리스트에 일정(객체)의 주소를 추가, 삭제, 서치하는 메소드 addScheduleList, deleteScheduleList, searchScheduleList가 있다.
+//MenuManager의 switch문에 따라 실행되는 메소드 addSchedule, deleteSchedule, editSchedule, viewSchedules가 있다.
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,11 +9,12 @@ import Schedule.Assignment;
 import Schedule.Exam;
 import Schedule.Promise;
 import Schedule.Schedule;
+import Schedule.ScheduleCategory;
 
 public class ScheduleManager {  //ScheduleManager 클래스
-	Scanner input;      //필드의 변수들
-	Schedule schedule;
-	ArrayList<Schedule> scheduleList = new ArrayList<Schedule>();  //schedule 객체의 주소를 저장하는 리스트
+	private Scanner input;      //필드의 변수들
+	private Schedule schedule;
+	private ArrayList<Schedule> scheduleList = new ArrayList<Schedule>();  //schedule 객체의 주소를 저장하는 리스트
 	
 	ScheduleManager(Scanner input){  //생성자를 통해 Manumanager에서 받은 input을 그대로 사용
 		this.input = input;
@@ -44,22 +49,22 @@ public class ScheduleManager {  //ScheduleManager 클래스
 			System.out.print("Select num for Schedule Category (1~4): ");
 			Category = input.nextInt();  //카테고리를 입력받고 조건문에 따라 if 실행
 			if(Category == 1) {
-				this.schedule = new Schedule();
+				this.schedule = new Schedule(ScheduleCategory.Course);
 				schedule.getUserInput(input);
 				addScheduleList(schedule); //addScheduleList() 함수로 리스트 현재 schedule 객체의 주소 추가
 				break;
 			}else if(Category == 2) {
-				this.schedule = new Assignment();  //Assignment 객체 생성
+				this.schedule = new Assignment(ScheduleCategory.Assignment);  //Assignment 객체 생성
 				schedule.getUserInput(input);
 				addScheduleList(schedule); //addScheduleList() 함수로 리스트 현재 schedule 객체의 주소 추가
 				break;
 			}else if(Category == 3) {
-				this.schedule = new Exam();  //Exam 객체 생성
+				this.schedule = new Exam(ScheduleCategory.Exam);  //Exam 객체 생성
 				schedule.getUserInput(input); 
 				addScheduleList(schedule); //addScheduleList() 함수로 리스트 현재 schedule 객체의 주소 추가
 				break;
 			}else if(Category == 4) {
-				this.schedule = new Promise();  //Promise 객체 생성
+				this.schedule = new Promise(ScheduleCategory.Promise);  //Promise 객체 생성
 				schedule.getUserInput(input);
 				addScheduleList(schedule); //addScheduleList() 함수로 리스트 현재 schedule 객체의 주소 추가
 				break;
@@ -67,7 +72,8 @@ public class ScheduleManager {  //ScheduleManager 클래스
 				System.out.println("You input the wrong num.");
 				continue;
 			}
-		}        
+		}
+		System.out.println("The new schedule is added."); //일정이 리스트에 추가되었음을 알림
 	}
 	public void deleteSchedule() {  //일정 삭제 함수
 		System.out.print("Input the Schedule content you want to delete: ");  //삭제할 일정의 content를 입력받음.
@@ -137,10 +143,10 @@ public class ScheduleManager {  //ScheduleManager 클래스
 			System.out.println("The scheduleList is empty.");
 			return;
 		}
-    	System.out.println("[ScheduleList]");
+    	System.out.println("*** ScheduleList ***");
 		for(int i = 0; i < scheduleList.size(); i++) {  //for 문으로 모든 스케줄 출력
 			System.out.print(">> ");
-			scheduleList.get(i).printInfo();
+			scheduleList.get(i).printInfo();  //리스트에 저장된 주소마다 있는 printInfo 메소드 실행
 			System.out.println();
 		}
 	}
