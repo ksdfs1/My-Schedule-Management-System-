@@ -1,4 +1,4 @@
-//약속 일정을 의미하는 Promise 클래스는 Schedule 클래스의 상속을 받는다.
+//약속 일정을 의미하는 Promise 클래스는 Schedule 클래스의 상속을 받는다. 
 //기본 생성자와 부모 클래스의 생성자를 통해 카테고리를 초기화하는 생성자, 그리고 who와 place를 초기화 하는 생성자가 있다.(method overloading)
 //필드에는 약속대상과 약속장소를 의미하는 who, place 변수가 있고 그에 따른 getter, setter 메소드가 있다.
 //출력 내용이 부모 클래스와 다르기 때문에 printInfo 메소드를 재정의함.(method overriding)

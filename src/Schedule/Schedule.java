@@ -1,4 +1,4 @@
-//Schedule 카테코리에서 course를 담당하는 Schedule 클래스
+//Schedule 카테코리에서 course를 담당하는 Schedule 클래스 
 //기본 생성자와 category를 초기화하는 생성자, 그리고 date, time, content를 초기화하는 생성자가 있다.(method overloading)
 //course를 기본 디폴트로 하여 변수로 category, date, time, content를 가지고 이에 해당하는 getter, setter 메소드가 있다.(category 제외)
 //printInfo 메소드는 필드값을 출력하는 기능을 가지고 있는데 switch 문을 이용하여 카테고리에 따라 category 변수에 알맞은 String 값을 할당한다.

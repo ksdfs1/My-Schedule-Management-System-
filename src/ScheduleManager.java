@@ -1,4 +1,4 @@
-//Schedule 리스트를 관리하고 프로그램이 실행된 후 사용자로부터 메뉴를 입력받으면 그에 따라 이 클래스에 있는 메소드가 실행된다.
+//Schedule 리스트를 관리하고 프로그램이 실행된 후 사용자로부터 메뉴를 입력받으면 그에 따라 이 클래스에 있는 메소드가 실행된다. 
 //필드에는 사용자의 입력을 받는 input, 일정(객체)의 주소를 할당할 schedule, 모든 일정(객체)의 주소를 저장할 scheduleList(ArrayList) 변수가 있다.
 //리스트에 일정(객체)의 주소를 추가, 삭제, 서치하는 메소드 addScheduleList, deleteScheduleList, searchScheduleList가 있다.
 //MenuManager의 switch문에 따라 실행되는 메소드 addSchedule, deleteSchedule, editSchedule, viewSchedules가 있다.
