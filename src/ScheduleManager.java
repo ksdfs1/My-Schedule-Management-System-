@@ -1,5 +1,6 @@
 //Schedule 리스트를 관리하고 프로그램이 실행된 후 사용자로부터 메뉴를 입력받으면 그에 따라 이 클래스에 있는 메소드가 실행된다. 
 //필드에는 사용자의 입력을 받는 input, 일정(객체)의 주소를 할당할 schedule, 모든 일정(객체)의 주소를 저장할 scheduleList(ArrayList) 변수가 있다.
+//기본 생성자와 input을 초기화하는 생성자가 있다.(method overloading)
 //리스트에 일정(객체)의 주소를 추가, 삭제, 서치하는 메소드 addScheduleList, deleteScheduleList, searchScheduleList가 있다.
 //MenuManager의 switch문에 따라 실행되는 메소드 addSchedule, deleteSchedule, editSchedule, viewSchedules가 있다.
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class ScheduleManager {  //ScheduleManager 클래스
 		
 	}
 	
-	ScheduleManager(Scanner input) {  //생성자를 통해 ManuManager에서 받은 input을 그대로 사용
+	ScheduleManager(Scanner input) {  //생성자를 통해 ManuManager에서 받은 input을 그대로 사용(method overloading)
 		this.input = input;
 	}
 	
@@ -45,7 +46,7 @@ public class ScheduleManager {  //ScheduleManager 클래스
 	
 	public void addSchedule() {  //일정 추가 함수
 		int Category = 0;
-		while(Category ==0) {
+		while(Category == 0) {
 			System.out.println("1. for Course");  //카테고리를 물음
 			System.out.println("2. for Assignment");
 			System.out.println("3. for Exam");
@@ -95,15 +96,17 @@ public class ScheduleManager {  //ScheduleManager 클래스
 		}
 	}
     public void editSchedule() {  //일정 편집 함수
+    	if(scheduleList.isEmpty()) {  //scheduleList가 비어있는지 검사 후 비어있으면 리턴
+			System.out.println("The scheduleList is empty.");
+			return;
+    	}
 		System.out.print("Input the Schedule content you want to edit: ");  //편집할 스케줄의 content를 입력받음.
 		input.nextLine();
 		String content = input.nextLine();
 		searchScheduleList(content);  //searchScheduleList() 함수에서 현재 사용자가 입력한 content를 받아서 원하는 주소 찾아옴.
-		if(schedule == null) {  //schedule이 null이면 리턴하여 다시 하도록 함.
+		if(schedule == null) {  //schedule이 null인지 검사
 			System.out.println("The schedule doesn't exist.");
-			return;
-		}
-		if(schedule.getContent().equals(content)) {  //schedule(필드)의 content 값이 입력받은 content 값과 같으면 실행(반복)
+		}else if(schedule.getContent().equals(content)) {  //schedule(필드)의 content 값이 입력받은 content 값과 같으면 실행(반복)
 			int num = 0;
 			while(num != 4) {  //사용자가 편집을 종료하기 전까지는 계속 반복한다.
 				System.out.println();  //아래는 어떤 것을 편집할 것인지 입력받는 코드이다
@@ -143,15 +146,15 @@ public class ScheduleManager {  //ScheduleManager 클래스
 		}
 	}
     public void viewSchedules() {  //일정 보기 함수
-    	if(scheduleList.isEmpty()) {  //schedule이 비어있으면 리턴
+    	if(scheduleList.isEmpty()) {  //scheduleList가 비어있는지 검사
 			System.out.println("The scheduleList is empty.");
-			return;
-		}
-    	System.out.println("*** ScheduleList ***");
-		for(int i = 0; i < scheduleList.size(); i++) {  //for 문으로 모든 스케줄 출력
-			System.out.print(">> ");
-			scheduleList.get(i).printInfo();  //리스트에 저장된 주소마다 있는 printInfo 메소드 실행
-			System.out.println();
+    	}else {  //아니면 출력
+    		System.out.println("*** ScheduleList ***");
+    		for(int i = 0; i < scheduleList.size(); i++) {  //for 문으로 모든 스케줄 출력
+    			System.out.print(">> ");
+    			scheduleList.get(i).printInfo();  //리스트에 저장된 주소마다 있는 printInfo 메소드 실행
+    			System.out.println();
+    		}
 		}
 	}
 }
