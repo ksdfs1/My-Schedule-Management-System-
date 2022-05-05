@@ -8,7 +8,7 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class Promise extends Schedule {  //Schedule 클래스를 부모 클래스로 두는 Promise 클래스
+public class Promise extends Schedule implements ScheduleInput {  //Schedule 클래스를 부모 클래스로 두는 Promise 클래스
 	protected String who;  //약속대상 변수
 	protected String place;  //약속장소 변수
 	
@@ -41,7 +41,7 @@ public class Promise extends Schedule {  //Schedule 클래스를 부모 클래스로 두는 
 		this.place = place;
 	}
 	
-	public void printInfo() {  //필드값을 출략하는 메소드(Promise는 who와 place까지 받기 때문에 부모 클래스와 같은 이름의 메소드를 새로 만들었다)
+	public void printInfo() {  //필드값을 출략하는 메소드(Promise는 who와 place까지 받기 때문에 재정의 + abstract method 재정의)
 		System.out.print("[Category: " + setget_s_category() + "]  <date>: " + date + "  <time>: " + time 
 						+ "  <with>: " + who + "  <place>: " + place + "  <content>: " + content);
 	}

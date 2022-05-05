@@ -7,7 +7,7 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class Assignment extends Schedule {  //Schedule 클래스를 부모 클래스오 두는 Assignment 클래스
+public class Assignment extends Schedule implements ScheduleInput {  //Schedule 클래스를 부모 클래스오 두는 Assignment 클래스
 	
 	public Assignment() {  //기본 생성자
 		
@@ -17,8 +17,9 @@ public class Assignment extends Schedule {  //Schedule 클래스를 부모 클래스오 두
 		super(category);
 	}
 	
-	public void printInfo() { //필드값을 출력하는 함수(date와 time을 due date와 due time으로 바꾸기 위해 재정의)
-		System.out.print("[Category: " + setget_s_category() + "]  <due date>: " + date + "  <due time>: " + time + "  <content>: " + content);
+	public void printInfo() { //필드값을 출력하는 함수(date와 time을 due date와 due time으로 바꾸기 위해 재정의 + abstract method 재정의)
+		System.out.print("[Category: " + setget_s_category() + "]  <due date>: " + date 
+						 + "  <due time>: " + time + "  <content>: " + content);
 	}
 	
 	public void getUserInput(Scanner input) {  //마찬가지로 date와 time을 due date와 due time으로 바꾸기 위해 새로 작성함

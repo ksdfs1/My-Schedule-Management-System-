@@ -8,7 +8,7 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class Exam extends Schedule {  //Schedule 클래스를 부모 클래스로 두는 Exam 클래스
+public class Exam extends Schedule implements ScheduleInput {  //Schedule 클래스를 부모 클래스로 두는 Exam 클래스
 	protected String place;  //시험 장소를 입력할 변수
 	
 	public Exam() {  //기본 생성자
@@ -31,7 +31,7 @@ public class Exam extends Schedule {  //Schedule 클래스를 부모 클래스로 두는 Exa
 		this.place = place;
 	}
 	
-	public void printInfo() {  //필드값을 출력하는 메소드(Exam은 장소까지 받기 때문에 부모 클래스와 같은 이름의 메소드를 새로 만들었다)
+	public void printInfo() {  //필드값을 출력하는 메소드(Exam은 장소까지 받기 때문에 재정의 + abstract method 재정의)
 		System.out.print("[Category: " + setget_s_category() + "]  <date>: " + date + "  <time>: " + time 
 						+ "  <place>: " + place + "  <content>: " + content);
 	}

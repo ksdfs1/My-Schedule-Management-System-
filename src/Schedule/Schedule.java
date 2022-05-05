@@ -1,14 +1,14 @@
-//Schedule 카테코리에서 course를 담당하는 Schedule 클래스 
+//Schedule 카테코리에서 course를 담당하는 Schedule abstract 클래스 
 //기본 생성자와 category를 초기화하는 생성자, 그리고 date, time, content를 초기화하는 생성자가 있다.(method overloading)
-//course를 기본 디폴트로 하여 변수로 category, date, time, content를 가지고 이에 해당하는 getter, setter 메소드가 있다.
-//printInfo 메소드는 필드값을 출력하는 기능을 가지고 있는데 switch 문을 이용하여 카테고리에 따라 category 변수에 알맞은 String 값을 할당한다.
-//getUserInput 메소드는 Schedule이 리스트에 추가될 때 실행되어 사용자가 입력한 값을 필드의 변수에 할당한다.
+//필드에 변수로 category, date, time, content를 가지고 이에 해당하는 getter, setter 메소드가 있다.
+//printInfo() 메소드를 abstract로 선언 -> 필드의 변수로 일정을 출력하는 메소드임.
+//getUserInput() 메소드를 abstract로 선언 -> 사용자에게 일정 날짜, 시간 등을 입력받을 때 사용되는 메소드임.
 package Schedule;
 
 import java.util.Scanner;
 
-public class Schedule {  //Schedule 클래스
-	protected ScheduleCategory category = ScheduleCategory.Course;  //course를 기본 디폴트로 함.
+public abstract class Schedule {  //Schedule abstract 클래스(이 클래스는 직접 객체를 생성할 수 없다.)
+	protected ScheduleCategory category;  //원래 Course가 디폴트 였으나 Course 클래스를 만들었으므로 제거
 	protected int date;       //필드에 변수 선언
 	protected String time;
 	protected String content;
@@ -78,22 +78,5 @@ public class Schedule {  //Schedule 클래스
 		return s_category;
 	}
 
-	public void printInfo() {  //필드값을 출력하는 메소드
-		System.out.print("[Category: " + setget_s_category() + "]  <date>: " + date + "  <time>: " + time + "  <content>: " + content);
-	}
-	
-	public void getUserInput(Scanner input) {  //객체가 생성되고 사용자가 입력을 시작하면 입력받아 필드에 저장하는 메소드
-		System.out.print("Input the date: ");  
-		int date = input.nextInt();
-		this.setDate(date);  //setDate 메소드를 통해 필드에 값 저장
-		
-		System.out.print("Input the time: ");
-		String time = input.next();
-		this.setTime(time);  //setTime 메소드를 통해 필드에 값 저장
-		
-		System.out.print("Schedule Content: ");
-		input.nextLine();
-		String content = input.nextLine();
-		this.setContent(content);  //setContent 메소드를 통해 필드에 값 저장
-	}
+	public abstract void printInfo();
 }
