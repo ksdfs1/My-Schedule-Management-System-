@@ -7,10 +7,10 @@ public class MenuManager {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		ScheduleManager scheduleManager = new ScheduleManager(input);
-		seletMenu(scheduleManager, input);
+		selectMenu(scheduleManager, input);
 	}
 	
-	public static void seletMenu(ScheduleManager scheduleManager, Scanner input) {
+	public static void selectMenu(ScheduleManager scheduleManager, Scanner input) {
 		for(;;) {
 			try {
 				showMenu();
