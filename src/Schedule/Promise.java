@@ -8,11 +8,11 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class Promise extends Schedule implements ScheduleInput {  //Schedule 클래스를 부모 클래스로 두는 Promise 클래스
-	protected String who;  //약속대상 변수
-	protected String place;  //약속장소 변수
+public class Promise extends Schedule {
+	protected String who;
+	protected String place;
 	
-	public Promise() {  //생성자
+	public Promise() {
 		
 	}
 	
@@ -20,12 +20,7 @@ public class Promise extends Schedule implements ScheduleInput {  //Schedule 클�
 		super(category);
 	}
 	
-	public Promise(String who, String place) {  //생성자(who, place 초기화)
-		this.who = who;
-		this.place = place;
-	}
-	
-	public String getWho() {  //아래 메소드들은 who와 place 값을 할당하고 리턴하는 setter, getter 메소드이다.
+	public String getWho() {
 		return who;
 	}
 	
@@ -41,32 +36,28 @@ public class Promise extends Schedule implements ScheduleInput {  //Schedule 클�
 		this.place = place;
 	}
 	
-	public void printInfo() {  //필드값을 출략하는 메소드(Promise는 who와 place까지 받기 때문에 재정의 + abstract method 재정의)
-		System.out.print("[Category: " + setget_s_category() + "]  <date>: " + date + "  <time>: " + time 
+	public void printInfo() {
+		System.out.print("[Category: " + getCategory() + "]  <date>: " + date + "  <time>: " + time 
 						+ "  <with>: " + who + "  <place>: " + place + "  <content>: " + content);
 	}
 	
-	public void getUserInput(Scanner input) {  //필드에 입력받은 값을 할당하는 메소드
-		System.out.print("Input the date: ");  
-		int date = input.nextInt();
-		this.setDate(date);
-		
-		System.out.print("Input the time: ");
-		String time = input.next();
-		this.setTime(time);
-		
-		System.out.print("With whom?: ");
-		input.nextLine();
-		String who = input.nextLine();
-		this.setWho(who);
-		
+	public void getUserInput(Scanner input) {
+		setScheduleDate(input);
+		setScheduleTime(input);
+		setSchedulePlace(input);
+		setScheduleContent(input);
+		setScheduleWho(input);
+	}
+	
+	public void setSchedulePlace(Scanner input) {
 		System.out.print("Input the place: ");
 		String place = input.next();
 		this.setPlace(place);
-		
-		System.out.print("Schedule Content: ");
-		input.nextLine();
-		String content = input.nextLine();
-		this.setContent(content);
+	}
+	
+	public void setScheduleWho(Scanner input) {
+		System.out.print("With whom?: ");
+		String who = input.nextLine();
+		this.setWho(who);
 	}
 }

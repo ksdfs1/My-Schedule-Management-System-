@@ -8,50 +8,40 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class Exam extends Schedule implements ScheduleInput {  //Schedule 클래스를 부모 클래스로 두는 Exam 클래스
-	protected String place;  //시험 장소를 입력할 변수
+public class Exam extends Schedule {
+	protected String place;
 	
-	public Exam() {  //기본 생성자
+	public Exam() {
 		
 	}
 	
-	public Exam(ScheduleCategory category) {  //생성자(super를 통해 category 초기화)
+	public Exam(ScheduleCategory category) {
 		super(category);
 	}
 	
-	public Exam(String place) {  //생성자(place 초기화)
-		this.place = place;
-	}
-	
-	public String getPlace() {  //place의 값을 리턴하는 메소드
+	public String getPlace() {
 		return place;
 	}
 	
-	public void setPlace(String place) {  //parameter로 받은 값을 필드에 할당하는 메소드
+	public void setPlace(String place) {
 		this.place = place;
 	}
 	
-	public void printInfo() {  //필드값을 출력하는 메소드(Exam은 장소까지 받기 때문에 재정의 + abstract method 재정의)
-		System.out.print("[Category: " + setget_s_category() + "]  <date>: " + date + "  <time>: " + time 
+	public void printInfo() {
+		System.out.print("[Category: " + getCategory() + "]  <date>: " + date + "  <time>: " + time 
 						+ "  <place>: " + place + "  <content>: " + content);
 	}
 	
-	public void getUserInput(Scanner input) {  //장소 값을 받기 위해 새로 만들었다.
-		System.out.print("Input the date: ");  
-		int date = input.nextInt();
-		this.setDate(date);
-		
-		System.out.print("Input the time: ");
-		String time = input.next();
-		this.setTime(time);
-		
+	public void getUserInput(Scanner input) {
+		setScheduleDate(input);
+		setScheduleTime(input);
+		setSchedulePlace(input);
+		setScheduleContent(input);
+	}
+	
+	public void setSchedulePlace(Scanner input) {
 		System.out.print("Input the place: ");
 		String place = input.next();
 		this.setPlace(place);
-		
-		System.out.print("Schedule Content: ");  
-		input.nextLine();
-		String content = input.nextLine();
-		this.setContent(content);
 	}
 }

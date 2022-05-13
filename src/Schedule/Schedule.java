@@ -7,27 +7,29 @@ package Schedule;
 
 import java.util.Scanner;
 
-public abstract class Schedule {  //Schedule abstract 클래스(이 클래스는 직접 객체를 생성할 수 없다.)
-	protected ScheduleCategory category;  //원래 Course가 디폴트 였으나 Course 클래스를 만들었으므로 제거
-	protected int date;       //필드에 변수 선언
+import exception.TimeFormatException;
+
+public abstract class Schedule implements ScheduleInput{
+	protected ScheduleCategory category;
+	protected int date;
 	protected String time;
 	protected String content;
 	
-	public Schedule() {  //생성자
+	public Schedule() {
 		
 	}
 	
-	public Schedule(ScheduleCategory category) {  //생성자(category 초기화)
-		this.category = category;
-	}
-	
-	public Schedule(int date, String time, String content) {  //생성자(date, time, content 초기화)
+	public Schedule(int date, String time, String content) {
 		this.date = date;
 		this.time = time;
 		this.content = content;
 	}
 	
-	public ScheduleCategory getCategory() {  //아래의 메소드들은 각 변수의 getter, setter 메소드이다
+	public Schedule(ScheduleCategory category) {
+		this.category = category;
+	}
+	
+	public ScheduleCategory getCategory() {
 		return category;
 	}
 
@@ -47,7 +49,10 @@ public abstract class Schedule {  //Schedule abstract 클래스(이 클래스는 직접 객
 		return time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(String time) throws TimeFormatException {
+		if(!time.contains(":")) {
+			throw new TimeFormatException();
+		}
 		this.time = time;
 	}
 
@@ -59,24 +64,31 @@ public abstract class Schedule {  //Schedule abstract 클래스(이 클래스는 직접 객
 		this.content = content;
 	}
 	
-	public String setget_s_category() {  //printInfo를 실행할 때 s_category를 set하여 리턴하는 함수(자식 클래스들도 printInfo 실행 시 접근한다.)
-		String s_category = "none";
-		switch(this.category) {
-		case Course:
-			s_category = "Course";
-			break;
-		case Assignment:
-			s_category = "Assignment";
-			break;
-		case Exam:
-			s_category = "Exam";
-			break;
-		case Promise:
-			s_category = "Promise";
-			break;
-		}
-		return s_category;
-	}
+	public void setScheduleDate(Scanner input) {
+		 System.out.print("Input the date: ");
+		 int date = input.nextInt();
+		 this.setDate(date);
+	 }
+	    
+	 public void setScheduleTime(Scanner input) {
+		 String time = "";
+		 while(!time.contains(":")) {
+			 System.out.print("Input the time: ");
+			 time = input.next();
+			 try {
+				 this.setTime(time);
+			 } catch (TimeFormatException e) {
+				 System.out.println("Incorrect Time format. Put the time that contains ':'. ex)09:00");
+			 }
+		 }
+	 }
 
-	public abstract void printInfo();
+	 public void setScheduleContent(Scanner input) {
+		 System.out.print("Schedule Content: ");
+		 input.nextLine();
+		 String content = input.nextLine();
+		 this.setContent(content);
+	 }
+	 
+	 public abstract void printInfo();
 }

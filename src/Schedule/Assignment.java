@@ -7,33 +7,44 @@ package Schedule;
 
 import java.util.Scanner;
 
-public class Assignment extends Schedule implements ScheduleInput {  //Schedule 클래스를 부모 클래스오 두는 Assignment 클래스
+import exception.TimeFormatException;
+
+public class Assignment extends Schedule {
 	
-	public Assignment() {  //기본 생성자
+	public Assignment() {
 		
 	}
 	
-	public Assignment(ScheduleCategory category) {  //생성자(super를 통해 category 초기화)
+	public Assignment(ScheduleCategory category) {
 		super(category);
 	}
 	
-	public void printInfo() { //필드값을 출력하는 함수(date와 time을 due date와 due time으로 바꾸기 위해 재정의 + abstract method 재정의)
-		System.out.print("[Category: " + setget_s_category() + "]  <due date>: " + date 
+	public void printInfo() {
+		System.out.print("[Category: " + getCategory() + "]  <due date>: " + date 
 						 + "  <due time>: " + time + "  <content>: " + content);
 	}
 	
-	public void getUserInput(Scanner input) {  //마찬가지로 date와 time을 due date와 due time으로 바꾸기 위해 새로 작성함
-		System.out.print("Input the due date: ");  //Assignmnet는 due date을 입력하여 부모 클래스 필드의 date에 할당
+	public void getUserInput(Scanner input) {
+		setScheduleDate(input);
+		setScheduleTime(input);
+		setScheduleContent(input);
+	}
+	public void setScheduleDate(Scanner input) {
+		System.out.print("Input the due date: ");
 		int duedate = input.nextInt();
 		this.setDate(duedate);
-		
-		System.out.print("Input the due time: ");  //Assignmnet는 due time을 입력하여 부모 클래스 필드의 time에 할당
-		String duetime = input.next();
-		this.setTime(duetime);
-		
-		System.out.print("Schedule Content: ");  
-		input.nextLine();
-		String content = input.nextLine();
-		this.setContent(content);
-	}
+	 }
+	    
+	 public void setScheduleTime(Scanner input) {
+		 String duetime = "";
+		 while(!duetime.contains(":")) {
+			 System.out.print("Input the due time: ");
+			 duetime = input.next();
+			 try {
+				 this.setTime(duetime);
+			 } catch (TimeFormatException e) {
+				 System.out.println("Incorrect Time format. Put the time that contains ':'");
+			 }
+		 }
+	 }
 }
