@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -6,13 +7,17 @@ import Schedule.Assignment;
 import Schedule.Course;
 import Schedule.Exam;
 import Schedule.Promise;
-import Schedule.Schedule;
 import Schedule.ScheduleCategory;
 import Schedule.ScheduleInput;
 
-public class ScheduleManager {
-	private Scanner input;
-	private ArrayList<ScheduleInput> scheduleList = new ArrayList<ScheduleInput>();
+public class ScheduleManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1639553928036555615L;
+	
+	transient Scanner input;
+	ArrayList<ScheduleInput> scheduleList = new ArrayList<ScheduleInput>();
 
 	ScheduleManager() {
 
@@ -133,6 +138,8 @@ public class ScheduleManager {
 				scheduleList.get(i).printInfo();
 				System.out.println();
 			}
+		}else {
+			System.out.println("The scheduleList is empty.");
 		}
 	}
 	

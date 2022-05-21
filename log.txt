@@ -1,0 +1,14 @@
+5월 21, 2022 8:52:22 오후 log.EventLogger log
+INFO: view a list of schedule
+5월 21, 2022 8:52:27 오후 log.EventLogger log
+INFO: add a schedule
+5월 21, 2022 8:52:32 오후 log.EventLogger log
+INFO: add a schedule
+5월 21, 2022 8:52:33 오후 log.EventLogger log
+INFO: view a list of schedule
+5월 21, 2022 8:52:40 오후 log.EventLogger log
+INFO: view a list of schedule
+5월 21, 2022 8:52:47 오후 log.EventLogger log
+INFO: add a schedule
+5월 21, 2022 8:52:48 오후 log.EventLogger log
+INFO: view a list of schedule

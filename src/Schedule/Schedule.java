@@ -5,11 +5,17 @@
 //getUserInput() 메소드를 abstract로 선언 -> 사용자에게 일정 날짜, 시간 등을 입력받을 때 사용되는 메소드임.
 package Schedule;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import exception.TimeFormatException;
 
-public abstract class Schedule implements ScheduleInput{
+public abstract class Schedule implements ScheduleInput, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2567649598653654466L;
+	
 	protected ScheduleCategory category;
 	protected int date;
 	protected String time;
