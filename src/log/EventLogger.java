@@ -24,7 +24,7 @@ public class EventLogger {
 		}
 	}
 	
-	public void log(String logmessage) {
+	public void log(String logmessage) {  //문자열을 받아 log 파일에 기록하는 메소드
 		logger.info(logmessage);
 	}
 }

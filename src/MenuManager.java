@@ -17,7 +17,7 @@ public class MenuManager {
 		ScheduleManager scheduleManager = getObject("schedulemanager.ser");
 		if(scheduleManager == null) {
 			scheduleManager = new ScheduleManager(input);
-		}else {
+		}else {  //프로그램을 두번째로 실행했을 때 scheduleManager의 input에 null이 할당되어 NullPointerException 발생하는 것을 방지
 			scheduleManager.input = input;
 		}
 		
@@ -77,7 +77,6 @@ public class MenuManager {
 	
 	public static ScheduleManager getObject(String fileName) {
 		ScheduleManager scheduleManager = null;
-		
 		try {
 			FileInputStream file = new FileInputStream(fileName);
 			ObjectInputStream in = new ObjectInputStream(file);

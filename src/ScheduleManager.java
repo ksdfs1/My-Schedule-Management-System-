@@ -72,6 +72,7 @@ public class ScheduleManager implements Serializable{
 	
 	public void deleteSchedule() {
 		if(!scheduleList.isEmpty()) {
+			viewSchedules();
 			System.out.print("Input the Schedule number you want to delete: ");
 			int scheduleNum = input.nextInt();
 			if(scheduleNum > scheduleList.size()) {
@@ -87,6 +88,7 @@ public class ScheduleManager implements Serializable{
 
 	public void editSchedule() {
 		if(!scheduleList.isEmpty()) {
+			viewSchedules();
 			System.out.print("Input the Schedule number you want to edit: ");
 			int scheduleNum = input.nextInt();
 			if(scheduleNum > scheduleList.size()) {
