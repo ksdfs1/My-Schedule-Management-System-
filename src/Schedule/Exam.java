@@ -42,6 +42,7 @@ public class Exam extends Schedule {
 	public void setSchedulePlace(Scanner input) {
 		System.out.print("Input the place: ");
 		String place = input.next();
+		input.nextLine();
 		this.setPlace(place);
 	}
 }

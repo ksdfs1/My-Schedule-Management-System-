@@ -81,6 +81,7 @@ public abstract class Schedule implements ScheduleInput, Serializable{
 		 while(!time.contains(":")) {
 			 System.out.print("Input the time: ");
 			 time = input.next();
+			 input.nextLine();
 			 try {
 				 this.setTime(time);
 			 } catch (TimeFormatException e) {
@@ -91,7 +92,6 @@ public abstract class Schedule implements ScheduleInput, Serializable{
 
 	 public void setScheduleContent(Scanner input) {
 		 System.out.print("Schedule Content: ");
-		 input.nextLine();
 		 String content = input.nextLine();
 		 this.setContent(content);
 	 }

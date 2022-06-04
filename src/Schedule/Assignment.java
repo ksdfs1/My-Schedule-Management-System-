@@ -40,6 +40,7 @@ public class Assignment extends Schedule {
 		 while(!duetime.contains(":")) {
 			 System.out.print("Input the due time: ");
 			 duetime = input.next();
+			 input.nextLine();
 			 try {
 				 this.setTime(duetime);
 			 } catch (TimeFormatException e) {

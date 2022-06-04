@@ -1,3 +1,4 @@
+package manager;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -98,7 +99,7 @@ public class ScheduleManager implements Serializable{
 				ScheduleInput scheduleIn = scheduleList.get(scheduleNum - 1);
 				for(;;) {
 					try {
-						showEditMenu();
+						showEditMenu(scheduleNum);
 						int num = input.nextInt();
 						switch(num) {
 						case 1:
@@ -131,7 +132,7 @@ public class ScheduleManager implements Serializable{
 			System.out.println("The scheduleList is empty.");
 		}
 	}
-	
+
 	public void viewSchedules() {
 		if(!scheduleList.isEmpty()) {
 			System.out.println("*** ScheduleList ***");
@@ -143,6 +144,14 @@ public class ScheduleManager implements Serializable{
 		}else {
 			System.out.println("The scheduleList is empty.");
 		}
+	}
+	
+	public int size() {
+		return scheduleList.size();
+	}
+	
+	public ScheduleInput get(int index) {
+		return scheduleList.get(index);
 	}
 	
 	//아래부터는 부속적인 메소드들
@@ -161,7 +170,7 @@ public class ScheduleManager implements Serializable{
 		System.out.print("Select num for Schedule Category (1~5): ");
 	}
 
-	public void showEditMenu() {
+	public void showEditMenu(int scheduleNum) {
 		System.out.println();
 		System.out.println("[Schedule Edit Menu]");
 		System.out.println("1. Edit date");

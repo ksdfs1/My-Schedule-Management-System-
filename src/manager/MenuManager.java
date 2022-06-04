@@ -1,4 +1,5 @@
-//프로그램이 실행되면 메뉴를 출력하고 사용자로부터 메뉴 선택을 받는 MenuManager 클래스 
+package manager;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import gui.WindowFrame;
 import log.EventLogger;
 
 public class MenuManager {
@@ -17,11 +20,12 @@ public class MenuManager {
 		ScheduleManager scheduleManager = getObject("schedulemanager.ser");
 		if(scheduleManager == null) {
 			scheduleManager = new ScheduleManager(input);
-		}else {  //프로그램을 두번째로 실행했을 때 scheduleManager의 input에 null이 할당되어 NullPointerException 발생하는 것을 방지
+		}else {
 			scheduleManager.input = input;
 		}
 		
-		selectMenu(scheduleManager, input);
+		WindowFrame frame = new WindowFrame(scheduleManager);  //frame 생성
+		selectMenu(scheduleManager, input); 
 		putObject(scheduleManager, "schedulemanager.ser");
 	}
 	

@@ -38,15 +38,15 @@ public class Promise extends Schedule {
 	
 	public void printInfo() {
 		System.out.print("[Category: " + getCategory() + "]  <date>: " + date + "  <time>: " + time 
-						+ "  <with>: " + who + "  <place>: " + place + "  <content>: " + content);
+						+ "  <place>: " + place + "  <with>: " + who + "  <content>: " + content);
 	}
 	
 	public void getUserInput(Scanner input) {
 		setScheduleDate(input);
 		setScheduleTime(input);
 		setSchedulePlace(input);
-		setScheduleContent(input);
 		setScheduleWho(input);
+		setScheduleContent(input);
 	}
 	
 	public void setSchedulePlace(Scanner input) {
@@ -57,6 +57,7 @@ public class Promise extends Schedule {
 	
 	public void setScheduleWho(Scanner input) {
 		System.out.print("With whom?: ");
+		input.nextLine();
 		String who = input.nextLine();
 		this.setWho(who);
 	}
