@@ -1,8 +1,3 @@
-//Schedule 카테코리에서 course를 담당하는 Schedule abstract 클래스 
-//기본 생성자와 category를 초기화하는 생성자, 그리고 date, time, content를 초기화하는 생성자가 있다.(method overloading)
-//필드에 변수로 category, date, time, content를 가지고 이에 해당하는 getter, setter 메소드가 있다.
-//printInfo() 메소드를 abstract로 선언 -> 필드의 변수로 일정을 출력하는 메소드임.
-//getUserInput() 메소드를 abstract로 선언 -> 사용자에게 일정 날짜, 시간 등을 입력받을 때 사용되는 메소드임.
 package Schedule;
 
 import java.io.Serializable;
@@ -10,6 +5,7 @@ import java.util.Scanner;
 
 import exception.TimeFormatException;
 
+//모든 종류의 일정의 부모인 추상화 클래스 
 public abstract class Schedule implements ScheduleInput, Serializable{
 	/**
 	 * 
@@ -19,6 +15,8 @@ public abstract class Schedule implements ScheduleInput, Serializable{
 	protected ScheduleCategory category;
 	protected int date;
 	protected String time;
+	protected String place;
+	protected String who;
 	protected String content;
 	
 	public Schedule() {
@@ -61,6 +59,22 @@ public abstract class Schedule implements ScheduleInput, Serializable{
 		}
 		this.time = time;
 	}
+	
+	public String getPlace() {
+		return place;
+	}
+	
+	public void setPlace(String place) {
+		this.place = place;
+	}
+	
+	public String getWho() {
+		return who;
+	}
+	
+	public void setWho(String who) {
+		this.who = who;
+	}
 
 	public String getContent() {
 		return content;
@@ -90,8 +104,22 @@ public abstract class Schedule implements ScheduleInput, Serializable{
 		 }
 	 }
 
+	 public void setSchedulePlace(Scanner input) {
+		 System.out.print("Input the Place: ");
+		 String place = input.nextLine();
+		 this.setContent(place);
+	 }
+	 
+	 public void setScheduleWho(Scanner input) {
+		 System.out.print("With who: ");
+		 input.nextLine();
+		 String who = input.nextLine();
+		 this.setContent(who);
+	 }
+	 
 	 public void setScheduleContent(Scanner input) {
 		 System.out.print("Schedule Content: ");
+		 input.nextLine();
 		 String content = input.nextLine();
 		 this.setContent(content);
 	 }

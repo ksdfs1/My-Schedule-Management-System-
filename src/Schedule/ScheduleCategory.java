@@ -1,6 +1,6 @@
-//Schedule 카테고리를 분류해 놓은 클래스 
 package Schedule;
 
+//Schedule의 카테고리(종류)를 분류한 enum.
 public enum ScheduleCategory {
 	Course,
 	Assignment,

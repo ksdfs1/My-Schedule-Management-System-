@@ -10,47 +10,75 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import Schedule.ScheduleInput;
-import listeners.MenuSelectionListener;
+import event.MenuSelectionListener;
 import manager.ScheduleManager;
 
-public class ScheduleViewer extends JPanel {  //JPanel의 상속을 받는 클래스로 리스트에 있는 일정을 보여주는 GUI를 만든다.
-	
-	WindowFrame frame; //생성자로 받은 frame을 저장할 필드 변수
-	ScheduleManager scheduleManager; //생성자로 받은 ScheduleManager를 저장할 필드 변수
-											 
-	public ScheduleViewer(WindowFrame frame, ScheduleManager scheduleManager) { //frame, ScheduleManager 객체를 받는 생성자
-		this.frame = frame; //받은 frame으로 필드 변수 초기화
-		this.scheduleManager = scheduleManager; //인자로 받은 scheduleManager로 필드 변수 초기화 
+//현재 리스트에 존재하는 일정을 Table 형태로 보여주는 GUI.
+public class ScheduleViewer extends JPanel {
+	WindowFrame frame;
+	ScheduleManager scheduleManager;
+	JPanel panel;
+
+	public ScheduleViewer(WindowFrame frame, ScheduleManager scheduleManager) { 
+		this.frame = frame;
+		this.scheduleManager = scheduleManager;
 		
-		System.out.println("***" + scheduleManager.size() + "***");  //현재 일정 수 출력
+		System.out.println("***" + scheduleManager.size() + "***");
 		
-		DefaultTableModel model = new DefaultTableModel();  //table model 생성 
-		model.addColumn("Num");  //model에 5개의 column(열)을 add
-		model.addColumn("Date");
-		model.addColumn("Time");
-		model.addColumn("Content");
-		
-		for(int i = 0; i < scheduleManager.size(); i++) {  
-			Vector row = new Vector();
-			ScheduleInput si= scheduleManager.get(i); //si에 i(인덱스)에 해당하는 객체 주소 저장
-			row.add(i+1); //row에 일정 넘버 추가
-			row.add(si.getDate()); //row에 날짜 추가
-			row.add(si.getTime()); //row에 시간 추가
-			row.add(si.getContent()); //row에 내용 추가
-			model.addRow(row); //model에 row 붙임
-		}
-		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		JButton button = new JButton("Back to Menu");
 		panel.add(button);
 		
-		button.addActionListener(new MenuSelectionListener(frame)); //button에 ActionListener 추가(MenuSelectionListener 객체 전달)
-																	//버튼을 누르면 MenuSelection GUI가 띄워짐
-		JTable table = new JTable(model);  //table 생성
-		JScrollPane sp = new JScrollPane(table);  //ScrollPane 생성(인자로 table 전달)
+		writeTable(panel);
 		
-		this.add(sp, BorderLayout.NORTH);  //북쪽에 붙임
-		this.add(panel, BorderLayout.SOUTH);  //남쪽에 붙임
+		button.addActionListener(new MenuSelectionListener(frame));
 	}
 	
+	public void writeTable(JPanel panel) {
+		DefaultTableModel model = new DefaultTableModel();
+		model.addColumn("Num");
+		model.addColumn("Category");
+		model.addColumn("Date");
+		model.addColumn("Time");
+		model.addColumn("Place");
+		model.addColumn("With who?");
+		model.addColumn("Content");
+		try {
+			for(int i = 0; i < scheduleManager.size(); i++) {  
+				Vector row = new Vector();
+				ScheduleInput si = scheduleManager.get(i);
+				row.add(i+1);
+				row.add(si.getCategory());
+				row.add(si.getDate());
+				row.add(si.getTime());
+				if(si.getPlace() == null)
+					row.add("         -");
+				else row.add(si.getPlace());
+				if(si.getWho() == null)
+					row.add("         -");
+				else row.add(si.getWho());
+				row.add(si.getContent());
+				model.addRow(row);
+			}
+		}catch(NullPointerException e) {
+			System.out.println();
+			System.out.println("There is no schedule.");
+		}
+		
+		JTable table = new JTable(model);
+		JScrollPane sp = new JScrollPane(table);
+		this.add(sp, BorderLayout.NORTH);
+		this.add(panel, BorderLayout.SOUTH);
+	}
+	
+	public ScheduleManager getScheduleManager() {
+		return scheduleManager;
+	}
+
+	public void setScheduleManager(ScheduleManager scheduleManager) {
+		this.removeAll();
+		this.scheduleManager = scheduleManager;
+		
+		writeTable(panel);
+	}
 }

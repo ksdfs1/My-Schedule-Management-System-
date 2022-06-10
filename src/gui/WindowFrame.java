@@ -3,49 +3,78 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Schedule.ScheduleInput;
 import manager.ScheduleManager;
 
+//panel을 생성 및 그리는 기능을 가진 Frame
+//다양한 setters, getter 함수가 있다.
 public class WindowFrame extends JFrame{
-	MenuSelection menuSelection;  //panel 객체의 주소 저장할 변수들을 선언
+	MenuSelection menuSelection;
+	ScheduleInput schedule;
+	CategorySelection categorySelection;
 	ScheduleAdder scheduleAdder;
+	ExamAdder examAdder;
+	PromiseAdder promiseAdder;
 	ScheduleDeleter scheduleDeleter;
 	ScheduleEditor scheduleEditor;
+	ExamEditor examEditor;
+	PromiseEditor promiseEditor;
 	ScheduleEditInput scheduleEditInput;
 	ScheduleViewer scheduleViewer;
-	ScheduleManager scheduleManager;  //생성자로 받은 ScheduleManager 객체의 주소를 저장할 변수 선언
-	
-	public WindowFrame(ScheduleManager scheduleManager) {  //ScheduleManager 객체를 받는 생성자
-		                                                   //각 panel 객체들이 생성되고 menuSelection panel이 frame에 붙는다.
-		this.setSize(500, 550);  //frame 크기 설정
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //frame을 닫으면 프로그램 종료
+	ScheduleManager scheduleManager;
+
+	public WindowFrame(ScheduleManager scheduleManager) {
+		this.setSize(500, 550);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("My Frame");
 		
-		this.scheduleManager = scheduleManager;  //인자로 받은 scheduleManager로 필드 변수 초기화 
-		menuSelection = new MenuSelection(this);  //모든 panel 객체들을 생성
-		scheduleAdder = new ScheduleAdder(this);
-		scheduleDeleter = new ScheduleDeleter(this);
-		scheduleEditor = new ScheduleEditor(this);
-		scheduleEditInput = new ScheduleEditInput(this);
+		this.scheduleManager = scheduleManager;
+		menuSelection = new MenuSelection(this);
+		categorySelection = new CategorySelection(this);
+		scheduleAdder = new ScheduleAdder(this, this.scheduleManager);
+		examAdder = new ExamAdder(this, this.scheduleManager);
+		promiseAdder = new PromiseAdder(this, this.scheduleManager);
+		scheduleDeleter = new ScheduleDeleter(this, this.scheduleManager);
+		scheduleEditor = new ScheduleEditor(this, this.scheduleManager);
+		examEditor = new ExamEditor(this, this.scheduleManager);
+		promiseEditor = new PromiseEditor(this, this.scheduleManager);
+		scheduleEditInput = new ScheduleEditInput(this, this.scheduleManager);
 		scheduleViewer = new ScheduleViewer(this, this.scheduleManager);
 		
 		this.setupPanel(menuSelection);
 		
-		this.setVisible(true);  //frame(윈도우)이 화면상에 보이게 함
+		this.setVisible(true);
 	}
 
-	public void setupPanel(JPanel panel) {  //frame을 완전히 지우고 새로 panel을 붙이는 메소드
+	public void setupPanel(JPanel panel) {
 		this.getContentPane().removeAll();
 		this.getContentPane().add(panel);
 		this.revalidate();
 		this.repaint();
 	}
-	//아래는 모든 panel 객체들의 setter, getter 메소드이다.
+	
 	public MenuSelection getMenuSelection() {
 		return menuSelection;
 	}
 
 	public void setMenuSelection(MenuSelection menuSelection) {
 		this.menuSelection = menuSelection;
+	}
+	
+	public ScheduleInput getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(ScheduleInput schedule) {
+		this.schedule = schedule;
+	}
+	
+	public CategorySelection getCategorySelection() {
+		return categorySelection;
+	}
+
+	public void setCategorySelection(CategorySelection categorySelection) {
+		this.categorySelection = categorySelection;
 	}
 
 	public ScheduleAdder getScheduleAdder() {
@@ -54,6 +83,22 @@ public class WindowFrame extends JFrame{
 
 	public void setScheduleAdder(ScheduleAdder scheduleAdder) {
 		this.scheduleAdder = scheduleAdder;
+	}
+	
+	public ExamAdder getExamAdder() {
+		return examAdder;
+	}
+
+	public void setExamAdder(ExamAdder examAdder) {
+		this.examAdder = examAdder;
+	}
+
+	public PromiseAdder getPromiseAdder() {
+		return promiseAdder;
+	}
+
+	public void setPromiseAdder(PromiseAdder promiseAdder) {
+		this.promiseAdder = promiseAdder;
 	}
 	
 	public ScheduleDeleter getScheduleDeleter() {
@@ -70,6 +115,22 @@ public class WindowFrame extends JFrame{
 
 	public void setScheduleEditor(ScheduleEditor scheduleEditor) {
 		this.scheduleEditor = scheduleEditor;
+	}
+	
+	public ExamEditor getExamEditor() {
+		return examEditor;
+	}
+
+	public void setExamEditor(ExamEditor examEditor) {
+		this.examEditor = examEditor;
+	}
+
+	public PromiseEditor getPromiseEditor() {
+		return promiseEditor;
+	}
+
+	public void setPromiseEditor(PromiseEditor promiseEditor) {
+		this.promiseEditor = promiseEditor;
 	}
 	
 	public ScheduleEditInput getScheduleEditInput() {

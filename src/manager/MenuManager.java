@@ -6,12 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import gui.WindowFrame;
 import log.EventLogger;
 
+//메인 함수를 가진 클래스
 public class MenuManager {
 	static EventLogger logger = new EventLogger("log.txt");
 	

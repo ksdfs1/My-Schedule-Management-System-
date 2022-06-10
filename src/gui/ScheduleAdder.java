@@ -6,53 +6,73 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
-import listeners.MenuSelectionListener;
+import event.MenuSelectionListener;
+import event.ScheduleAdderListener;
+import manager.ScheduleManager;
 
-public class ScheduleAdder extends JPanel {  //JPanel의 상속을 받는 클래스로 일정(객체) 생성 시에 사용자에게 값(일정에 관한 정보)을 입력받는 GUI이다.
-	                                         //사용자의 입력을 받는 텍스트 field 4개와 field들의 이름 역할을 하는 label 4개가 있다
-	WindowFrame frame;  //생성자로 받은 frame을 저장할 필드 변수
+//기본 일정(Course, Assignment)을 추가할 때 정보를 입력받는 GUI.
+public class ScheduleAdder extends JPanel {  
+	WindowFrame frame;
+	ScheduleManager scheduleManager;
+	JPanel panel;
+	JTextField fieldDate;
+	JTextField fieldTime;
+	JTextField fieldContent;
 	
-	public ScheduleAdder(WindowFrame frame) {  //frame을 받는 생성자
-		this.frame = frame;  //받은 frame으로 필드 변수 초기화
+	public ScheduleAdder(WindowFrame frame, ScheduleManager scheduleManager) {
+		this.frame = frame;
+		this.scheduleManager = scheduleManager;
 		
-		JPanel panel = new JPanel();  //panel 생성
-		panel.setLayout(new SpringLayout());  //panel의 Layout을 SpringLayout으로 설정
-		                                          //JLabel.TRAILING은 label의 후미를 인식하여 텍스트 field 옆에 붙게 한다.(오른쪽 정렬 같은거)
-		JLabel labelNum = new JLabel("Number: ", JLabel.TRAILING);  //labelNum 생성
-		JTextField fieldNum = new JTextField(10);  //10짜리 fieldNum 생성
-		labelNum.setLabelFor(fieldNum);  //labelNum은 fieldNum을 위한 것이다.
-		panel.add(labelNum);  //panel에 labelNum 붙임
-		panel.add(fieldNum);  //panel에 fieldNum 붙임
-		//같은 과정 3번 반복
+		panel = new JPanel();
+		
 		JLabel labelDate = new JLabel("Date: ", JLabel.TRAILING);
-		JTextField fieldDate = new JTextField(10);
+		fieldDate = new JTextField(15);
 		labelDate.setLabelFor(fieldDate);
-		panel.add(labelDate);
-		panel.add(fieldDate);
 		
 		JLabel labelTime = new JLabel("Time: ", JLabel.TRAILING);
-		JTextField fieldTime = new JTextField(10);
+		fieldTime = new JTextField(15);
 		labelTime.setLabelFor(fieldTime);
-		panel.add(labelTime);
-		panel.add(fieldTime);
 		
 		JLabel labelContent = new JLabel("Content: ", JLabel.TRAILING);
-		JTextField fieldContent = new JTextField(10);
+		fieldContent = new JTextField(15);
 		labelContent.setLabelFor(fieldContent);
-		panel.add(labelContent);
-		panel.add(fieldContent);
 		
-		JButton button1 = new JButton("save");
-		JButton button2 = new JButton("cancel");
-		panel.add(button1);
-		panel.add(button2);
+		addToPanel(panel, labelDate, fieldDate);
+		addToPanel(panel, labelTime, fieldTime);
+		examAdder(panel);
+		promiseAdder(panel);
+		addToPanel(panel, labelContent, fieldContent);
 		
-		button1.addActionListener(new MenuSelectionListener(frame)); //button1에 addActionListener 추가(MenuSelectionListener 객체 전달)
-		button2.addActionListener(new MenuSelectionListener(frame)); //button2에 addActionListener 추가(MenuSelectionListener 객체 전달)
-																	 //save 또는 cancel 버튼을 누르면 MenuSelection GUI로 돌아감.
-		SpringUtilities.makeCompactGrid(panel, 5, 2, 6, 6, 6, 6);  //Layout 설정
+		JButton saveButton = new JButton("save");
+		JButton cancelButton = new JButton("cancel");
 		
-		this.add(panel);  //panel을 frame에 붙임.
+		panel.add(saveButton);
+		panel.add(cancelButton);
+		
+		saveButtonListener(saveButton);
+		cancelButton.addActionListener(new MenuSelectionListener(frame));
+
+		setLayout();
+		this.add(panel);
+	}
+	
+	public void examAdder(JPanel panel) {}
+	
+	public void promiseAdder(JPanel panel) {}
+	
+	public void addToPanel(JPanel panel, JLabel label, JTextField field) {
+		panel.add(label);
+		panel.add(field);
+	}
+	
+	public void saveButtonListener(JButton saveButton) {
+		saveButton.addActionListener(new ScheduleAdderListener(frame, fieldDate, fieldTime,
+															   fieldContent, scheduleManager));
+	}
+	
+	public void setLayout() {
+		panel.setLayout(new SpringLayout());
+		SpringUtilities.makeCompactGrid(panel, 4, 2, 6, 6, 6, 6);
 	}
 	
 }

@@ -2,6 +2,7 @@ package Schedule;
 
 import java.util.Scanner;
 
+//Course 일정 클래스
 public class Course extends Schedule {
 	
 	public Course() {

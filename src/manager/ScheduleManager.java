@@ -1,4 +1,5 @@
 package manager;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -11,6 +12,7 @@ import Schedule.Promise;
 import Schedule.ScheduleCategory;
 import Schedule.ScheduleInput;
 
+//일정을 관리하는 클래스
 public class ScheduleManager implements Serializable{
 	/**
 	 * 
@@ -18,7 +20,7 @@ public class ScheduleManager implements Serializable{
 	private static final long serialVersionUID = -1639553928036555615L;
 	
 	transient Scanner input;
-	ArrayList<ScheduleInput> scheduleList = new ArrayList<ScheduleInput>();
+	public ArrayList<ScheduleInput> scheduleList = new ArrayList<ScheduleInput>();
 
 	ScheduleManager() {
 
@@ -27,7 +29,15 @@ public class ScheduleManager implements Serializable{
 	ScheduleManager(Scanner input) {
 		this.input = input;
 	}
-
+	
+	public void addSchedule(ScheduleInput scheduleInput) {
+		scheduleList.add(scheduleInput);
+	}
+	
+	public void deleteSchedule(ScheduleInput scheduleInput) {
+		scheduleList.remove(scheduleInput);
+	}
+	
 	public void addSchedule() {
 		int category = 0;
 		ScheduleInput scheduleIn;
@@ -109,9 +119,21 @@ public class ScheduleManager implements Serializable{
 							scheduleIn.setScheduleTime(input);
 							break;
 						case 3:
-							scheduleIn.setScheduleContent(input);
+							if(!scheduleIn.getCategory().toString().equals("Course") && 
+							   !scheduleIn.getCategory().toString().equals("Assignment"))
+								scheduleIn.setSchedulePlace(input);
+							System.out.println("This Schedule doesn't have Place.");
 							break;
 						case 4:
+							if(!scheduleIn.getCategory().toString().equals("Course") && 
+							   !scheduleIn.getCategory().toString().equals("Assignment"))
+								scheduleIn.setScheduleWho(input);
+							System.out.println("This Schedule doesn't have Who.");
+							break;
+						case 5:
+							scheduleIn.setScheduleContent(input);
+							break;
+						case 6:
 							System.out.println("End editing.");
 							return;
 						default:
@@ -121,7 +143,7 @@ public class ScheduleManager implements Serializable{
 						System.out.println("Edit complete.");
 					}
 					catch(InputMismatchException e) {
-						System.out.println("Please put an integer between 1 and 4!");
+						System.out.println("Please put an integer between 1 and 6!");
 						if(input.hasNext()) {
 							input.next();
 						}
@@ -175,8 +197,10 @@ public class ScheduleManager implements Serializable{
 		System.out.println("[Schedule Edit Menu]");
 		System.out.println("1. Edit date");
 		System.out.println("2. Edit time");
-		System.out.println("3. Edit content");
-		System.out.println("4. End editing");
+		System.out.println("3. Edit place");
+		System.out.println("4. Edit who");
+		System.out.println("5. Edit content");
+		System.out.println("6. End editing");
 		System.out.print("Input one of the numbers: ");
 	}
 }

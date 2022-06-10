@@ -1,9 +1,10 @@
 package Schedule;
-//ScheduleInput은 Course, Assignment, Exam, Promise 클래스의 인터페이스이다.
+
 import java.util.Scanner;
 
 import exception.TimeFormatException;
 
+//Schedule 클래스의 인터페이스.
 public interface ScheduleInput {
 	
 	public ScheduleCategory getCategory();
@@ -22,6 +23,14 @@ public interface ScheduleInput {
 	
 	public void setContent(String content);
 	
+	public void setPlace(String place);
+	
+	public String getPlace();
+	
+	public void setWho(String who);
+	
+	public String getWho();
+	
 	public void printInfo();
 	
 	public void getUserInput(Scanner input);
@@ -29,6 +38,10 @@ public interface ScheduleInput {
 	public void setScheduleDate(Scanner input);
 	
 	public void setScheduleTime(Scanner input);
+	
+	public void setSchedulePlace(Scanner input);
+	
+	public void setScheduleWho(Scanner input);
 	
 	public void setScheduleContent(Scanner input);
 }
